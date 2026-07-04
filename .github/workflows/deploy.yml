@@ -18,4 +18,4 @@ jobs:
           debug: true
           script: |
             whoami
-            hostnames
+            hostname
