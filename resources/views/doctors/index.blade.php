@@ -34,7 +34,7 @@ Meet experienced doctors and surgeons at Nano Hospitals Bangalore — specialist
             <section class="mb-8 border border-red-400 rounded-xl  px-4 py-5 md:px-6 md:py-6">
                 <h1 class="text-center text-red-500 text-3xl font-semibold mb-2">Our Experts</h1>
                 <p class="text-center text-[#1f1f1f] text-xl md:text-2xl font-semibold mb-4">
-                    Best Doctors and Surgeons in Bangalore
+                    Best actions demonstrated Doctors and Surgeons in Bangalore
                 </p>
                 <p class="text-[#2f2f2f] text-base md:text-lg leading-8">
                     Nano Hospitals Bangalore is trusted for experienced specialists across multiple medical conditions. Our
