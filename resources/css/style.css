@@ -1,0 +1,481 @@
+:root {
+    --mega-height: 480px;
+
+}
+
+/* ===============================
+MEGA MENU BASE STYLES (fixed panel)
+=============================== */
+
+li.special {
+    position: relative;
+}
+
+/* hidden by default - panel now has a fixed height */
+.mega {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: 12px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 20px 28px;
+    /* slightly smaller vertical padding to fit height */
+    z-index: 9999;
+    width: 950px;
+    box-sizing: border-box;
+
+    /* new: fixed height so panel doesn't resize — only Procedures scrolls */
+    height: var(--mega-height);
+    align-items: flex-start;
+    /* keep column headers at top */
+}
+
+/* show on hover (desktop); mega-hover-persist keeps panel briefly after pointer leaves */
+li.special:hover>.mega,
+li.special:focus-within>.mega,
+li.special.mega-hover-persist>.mega {
+    display: flex !important;
+}
+
+/* when toggled by JS on mobile */
+li.special.open>.mega {
+    display: flex !important;
+}
+
+/* column layout - ensure columns do not stretch vertically */
+.mega .col {
+    width: 33.333%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    overflow: visible;
+    /* important: content can flow, but not create extra scroll for panel */
+}
+
+/* keep headings pinned at the top of their column */
+.mega .col h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    flex: 0 0 auto;
+}
+
+/* ===============================
+PROCEDURES: make ONLY the list scrollable
+=============================== */
+
+/* target the UL inside the procedures column to control scroll */
+.mega .col-middle>ul {
+    /* calculate available space: panel height minus vertical paddings and header height
+ If your h3 or padding sizes differ, tweak the calc() numbers accordingly. */
+    max-height: calc(var(--mega-height) - 80px);
+    /* 80px is a safe estimate for top padding + heading + bottom padding */
+    overflow-y: auto;
+    padding-right: 8px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* keep the Procedures column container from creating its own scroll */
+.mega .col-middle {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ensure other columns flow naturally and don't produce internal scrollbars */
+.mega .col:not(.col-middle) ul {
+    max-height: calc(var(--mega-height) - 40px);
+    overflow: visible;
+}
+
+/* ===============================
+SLIM + DARK SCROLLBAR (WebKit + Firefox)
+=============================== */
+
+/* Webkit browsers */
+.mega .col-middle>ul::-webkit-scrollbar {
+    width: 4px !important;
+}
+
+.mega .col-middle>ul::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.mega .col-middle>ul::-webkit-scrollbar-thumb {
+    background: #222 !important;
+    border-radius: 10px !important;
+}
+
+.mega .col-middle>ul::-webkit-scrollbar-thumb:hover {
+    background: #000 !important;
+}
+
+
+nav {
+    position: relative;
+    z-index: 10000;
+}
+
+
+/* Firefox */
+.mega .col-middle>ul {
+    scrollbar-width: thin !important;
+    scrollbar-color: #222 transparent !important;
+}
+
+/* Safety: ensure the UL is scrollable in case something else changed overflow */
+.mega .col-middle>ul {
+    overflow-y: auto !important;
+}
+
+/* ===============================
+RESPONSIVE (mobile) - panel becomes stacked & natural height
+=============================== */
+
+@media (max-width: 767px) {
+    .mega {
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+        border-radius: 8px;
+        display: none;
+        flex-direction: column;
+        height: auto;
+        /* allow height to grow on mobile */
+        padding: 16px;
+    }
+
+    .mega .col {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    /* on mobile let each UL have its own limited height if desired */
+    .mega .col-middle>ul {
+        max-height: 220px;
+    }
+}
+
+
+/* ===============================
+HOSPITAL FACILITIES MEGA
+=============================== */
+
+.facility-mega {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    right: 0;
+    transform: translateX(-8rem);
+    margin-top: 5px;
+    width: 1100px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    padding: 18px 20px;
+    z-index: 9999;
+}
+
+.facility:hover .facility-mega {
+    display: block;
+}
+
+.facility-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+}
+
+.facility-grid ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.facility-grid li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #333;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.facility-grid li img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+}
+
+.facility-grid li:hover {
+    color: #e11d48;
+}
+
+.facility-grid li:hover img {
+    opacity: 1;
+}
+
+/* ===============================
+SPECIALITIES MEGA (DESKTOP)
+=============================== */
+
+
+
+
+.mega-specialities {
+    display: none;
+    position: absolute;
+    height: auto !important;
+    min-height: unset !important;
+    align-items: flex-start;
+    top: 100%;
+    right: 0;
+    transform: translateX(-30rem);
+    right: 0;
+    margin-top: 12px;
+    width: 1050px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e6e6e6;
+    gap: 28px;
+}
+
+/* show on hover + delayed-close class (JS) */
+li.special:hover .mega-specialities,
+li.special.mega-hover-persist .mega-specialities {
+    display: flex;
+}
+
+.mega-col {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 30%;
+}
+
+.mega-col li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #6b6b6b;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.mega-col li img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+}
+
+.mega-col li span {
+    margin-left: auto;
+    color: #9a9a9a;
+}
+
+/* hover */
+.mega-col li:hover {
+    color: #e11d48;
+}
+
+.mega-col li:hover img {
+    opacity: 1;
+}
+
+.mega-col li:hover span {
+    color: #e11d48;
+}
+
+/* disable on mobile */
+@media (max-width: 767px) {
+    .mega-specialities {
+        display: none !important;
+    }
+}
+
+
+/* hide extra items */
+.condition-col .view-more {
+    display: block;
+    /* break out of flex row behavior */
+    margin-top: 8px;
+    margin-left: 0;
+    /* force left alignment */
+    padding-left: 0;
+    text-align: left;
+
+    font-size: 13px;
+    color: #e11d48;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Ensure icons do NOT affect View More */
+.condition-col .view-more img {
+    display: none;
+}
+
+.mega-conditions {
+    transform: translateX(-50rem);
+    /* increase value to move more LEFT */
+}
+
+.mega-packages {
+    transform: translateX(-55rem);
+    /* increase value to move more LEFT */
+}
+
+
+
+.main-menu li {
+    position: relative;
+}
+
+/* Mega dropdown container (aligned like Specialities — single block, top: 100%) */
+.mega-facilities {
+    display: none;
+    position: absolute;
+    height: auto !important;
+    min-height: unset !important;
+    align-items: flex-start;
+    top: 100%;
+    right: 0;
+    transform: translateX(-35rem);
+    margin-top: 12px;
+    width: 1050px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e6e6e6;
+    gap: 28px;
+}
+
+/* Columns */
+.mega-facilities .mega-col {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 200px;
+}
+
+.mega-facilities .mega-col li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 6px;
+    font-size: 14px;
+    color: #333;
+
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.mega-facilities .mega-col li:hover {
+    color: red;
+}
+
+/* Mobile disabled */
+@media (max-width: 767px) {
+    .mega-facilities {
+        display: none !important;
+    }
+}
+
+
+.mega-procedures {
+    display: none;
+    position: absolute;
+
+    align-items: flex-start;
+    top: 100%;
+    right: 0;
+    transform: translateX(-45rem);
+    right: 0;
+    margin-top: 12px;
+    width: 1050px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e6e6e6;
+    gap: 28px;
+}
+
+
+/* Mega Base Structure */
+.mega-doctors {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-35.5%);
+    margin-top: 12px;
+    height: auto;
+    width: 1050px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 24px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e6e6e6;
+
+    gap: 28px;
+    align-items: flex-start;
+}
+
+/* Show on hover + delayed-close class (JS) */
+li.special:hover .mega-doctors,
+li.special.mega-hover-persist .mega-doctors {
+    display: flex;
+}
+
+/* Column Styling */
+.mega-col {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 220px;
+}
+
+.mega-col li {
+    margin-bottom: 12px;
+}
+
+.mega-col li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: 0.3s ease;
+}
+
+.mega-col li a:hover {
+    color: #dc2626;
+    /* red-600 */
+}
+
+/* Icon styling */
+.mega-col li i {
+    font-size: 15px;
+    color: #727272;
+}
+
+/* Mobile: disable mega dropdown */
+@media (max-width: 767px) {
+    .mega-doctors {
+        display: none !important;
+    }
+}
