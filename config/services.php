@@ -23,7 +23,7 @@ return [
     ],
 
     'leads' => [
-        'webhook_url' => env('LEADS_WEBHOOK_URL', 'https://crm.ind.thbcare.in/api/v1/nanohospitals/hooks/add-lead-webhook'),
+        'webhook_url' => env('LEADS_WEBHOOK_URL', 'https://crm.ind.thbcare.in/api/v1/nano_truscan_lab/hooks/add-lead-webhook'),
         'webhook_api_key' => env('LEADS_WEBHOOK_API_KEY'),
         // Nano website lead codes (event_master); must not use Truscan *_truscan codes.
         'default_event_name' => env('LEADS_DEFAULT_EVENT_NAME', 'callback_second_opinion_nano'),
@@ -31,6 +31,16 @@ return [
         'send_notification_mail' => env('LEADS_SEND_NOTIFICATION_MAIL', true),
         'log_payload' => env('LEADS_LOG_PAYLOAD', false),
         'verify_ssl' => env('LEADS_VERIFY_SSL', true),
+        'payload' => [
+            'source' => env('LEADS_PAYLOAD_SOURCE', 'website'),
+            'department_name' => env('LEADS_PAYLOAD_DEPARTMENT_NAME', 'Preventive Health'),
+            'campaign_name' => env('LEADS_PAYLOAD_CAMPAIGN_NAME', 'Health Checkup 2026'),
+            'campaign_id' => env('LEADS_PAYLOAD_CAMPAIGN_ID', '12345678'),
+            'adset_name' => env('LEADS_PAYLOAD_ADSET_NAME', 'Full Body Checkup Bangalore'),
+            'gclid' => env('LEADS_PAYLOAD_GCLID', 'CjwKCAjw_example'),
+            'utm_parameter' => env('LEADS_PAYLOAD_UTM_PARAMETER', 'utm_source=google&utm_medium=cpc&utm_campaign=health-checkup'),
+            'device' => env('LEADS_PAYLOAD_DEVICE', 'mobile'),
+        ],
     ],
 
     'karexpert' => [

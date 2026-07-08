@@ -97,17 +97,34 @@ class LeadWebhookService
             'full_name' => trim((string) ($data['name'] ?? '')),
             'email' => is_string($data['email'] ?? null) ? $data['email'] : '',
             'city' => is_string($data['city'] ?? null) ? trim($data['city']) : '',
-            'source' => 'website',
+            'source' => (string) config('services.leads.payload.source', 'website'),
             'event_name' => $eventName,
-            'department_name' => $this->resolveDepartmentName($data),
-            'campaign_name' => is_string($data['campaign_name'] ?? null) ? $data['campaign_name'] : '',
-            'campaign_id' => is_string($data['campaign_id'] ?? null) ? $data['campaign_id'] : '',
-            'adset_name' => is_string($data['adset_name'] ?? null) ? $data['adset_name'] : '',
-            'gclid' => $this->resolveGclid($data),
-            'utm_parameter' => $this->resolveUtmParameter($data),
-            'device' => $this->resolveDevice(),
+            'department_name' => $this->configOrResolved(
+                $this->resolveDepartmentName($data),
+                'services.leads.payload.department_name'
+            ),
+            'campaign_name' => (string) config('services.leads.payload.campaign_name', ''),
+            'campaign_id' => (string) config('services.leads.payload.campaign_id', ''),
+            'adset_name' => (string) config('services.leads.payload.adset_name', ''),
+            'gclid' => $this->configOrResolved(
+                $this->resolveGclid($data),
+                'services.leads.payload.gclid'
+            ),
+            'utm_parameter' => $this->configOrResolved(
+                $this->resolveUtmParameter($data),
+                'services.leads.payload.utm_parameter'
+            ),
+            'device' => $this->configOrResolved(
+                $this->resolveDevice(),
+                'services.leads.payload.device'
+            ),
             'url' => $this->resolvePayloadUrl($data, $page),
         ];
+    }
+
+    private function configOrResolved(string $resolved, string $configKey): string
+    {
+        return $resolved !== '' ? $resolved : (string) config($configKey, '');
     }
 
     /**

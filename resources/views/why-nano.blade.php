@@ -148,15 +148,15 @@
   </section>
 
 
-    <section class="w-full bg-[#e9e9e9] py-20">
+    {{-- <section class="w-full bg-[#e9e9e9] py-20">
     <div class="container mx-auto px-6">
 
-      <!-- Heading -->
+    
       <h2 class="text-center text-2xl md:text-3xl font-semibold text-gray-600 mb-4">
         Latest High-end Facilities
       </h2>
 
-      <!-- Description -->
+     
       <p class="max-w-4xl mx-auto text-center text-gray-500 text-sm md:text-base leading-relaxed mb-14">
         Nano Hospitals, Hulimavu and Uttarahalli, are equipped with
         <span class="text-red-500 font-medium">
@@ -167,19 +167,19 @@
         environment for doctors and patients alike.
       </p>
 
-      <!-- Cards -->
+  
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        <!-- Card 1 -->
+     
         <div class="bg-white rounded-3xl shadow-md overflow-hidden text-center">
 
-          <!-- Image (top only rounded) -->
+         
           <img
             src="./assets/slider.png"
             alt="CT & MRI Scans"
             class="w-full h-[220px] object-cover block rounded-t-3xl" />
 
-          <!-- Bottom content -->
+         
           <div class="py-6">
             <p class="text-gray-600 font-semibold text-lg">
               CT & MRI Scans
@@ -188,16 +188,16 @@
 
         </div>
 
-        <!-- Card 2 -->
+   
         <div class="bg-white rounded-3xl shadow-md overflow-hidden text-center">
 
-          <!-- Image (top only rounded) -->
+        
           <img
             src="./assets/slider.png"
             alt="CT & MRI Scans"
             class="w-full h-[220px] object-cover block rounded-t-3xl" />
 
-          <!-- Bottom content -->
+          
           <div class="py-6">
             <p class="text-gray-600 font-semibold text-lg">
               CT & MRI Scans
@@ -206,16 +206,16 @@
 
         </div>
 
-        <!-- Card 3 -->
+      
         <div class="bg-white rounded-3xl shadow-md overflow-hidden text-center">
 
-          <!-- Image (top only rounded) -->
+       
           <img
             src="./assets/slider.png"
             alt="CT & MRI Scans"
             class="w-full h-[220px] object-cover block rounded-t-3xl" />
 
-          <!-- Bottom content -->
+        
           <div class="py-6">
             <p class="text-gray-600 font-semibold text-lg">
               CT & MRI Scans
@@ -228,7 +228,7 @@
 
 
     </div>
-  </section>
+  </section> --}}
 
   <section class="w-full bg-[#f4f4f4] py-20">
     <div class="container mx-auto px-6">
