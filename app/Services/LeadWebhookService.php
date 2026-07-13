@@ -98,6 +98,7 @@ class LeadWebhookService
             'email' => is_string($data['email'] ?? null) ? $data['email'] : '',
             'city' => is_string($data['city'] ?? null) ? trim($data['city']) : '',
             'source' => (string) config('services.leads.payload.source', 'website'),
+            'description' => $this->resolveDescription($data, $page),
             'event_name' => $eventName,
             'department_name' => $this->configOrResolved(
                 $this->resolveDepartmentName($data),
@@ -128,6 +129,31 @@ class LeadWebhookService
     }
 
     /**
+     * @param  array{description?: mixed, message?: mixed, department?: mixed}  $data
+     */
+    private function resolveDescription(array $data, string $page): string
+    {
+        foreach (['description', 'message'] as $key) {
+            $value = $data[$key] ?? null;
+
+            if (is_string($value) && trim($value) !== '') {
+                return trim($value);
+            }
+        }
+
+        // Careers flow expects selected department in CRM description.
+        if (str_contains(strtolower($page), 'career')) {
+            $department = $data['department'] ?? null;
+
+            if (is_string($department) && trim($department) !== '') {
+                return trim($department);
+            }
+        }
+
+        return '';
+    }
+
+    /**
      * Map website context to Nano event_master codes from the vendor doc (non-Truscan only).
      *
      * @param  array{name?: string, mobile?: string, email?: mixed, message?: mixed, source?: string, event_name?: string}  $data
@@ -150,6 +176,17 @@ class LeadWebhookService
 
         if (str_contains($source, 'career')) {
             return (string) config('services.leads.careers_event_name', 'callback_careers_nano');
+        }
+
+        if (
+            str_contains($source, 'request-call')
+            || str_contains($source, 'request_call')
+            || str_contains($source, 'request call')
+            || str_contains($source, 'callback')
+            || str_contains($source, 'contact')
+            || $source === ''
+        ) {
+            return 'nano_request_callback';
         }
 
         return (string) config('services.leads.default_event_name', 'callback_second_opinion_nano');

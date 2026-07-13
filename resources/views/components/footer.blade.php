@@ -64,7 +64,7 @@
             <div class="mt-6">
                 <p class="text-sm font-medium mb-3">Follow us on</p>
                 <div class="flex gap-3">
-                    <a href="https://www.instagram.com/nanohospitals/?hl=en" target="_blank"
+                    <a href="https://www.instagram.com/nanohospitalsofficial?igsh=MTdlb2VkYmptaHl2" target="_blank"
                         class="w-8 h-8 flex items-center justify-center rounded-full   hover:bg-red-500 hover:text-white transition">
                         <i class="fab fa-instagram text-sm"></i>
                     </a>
