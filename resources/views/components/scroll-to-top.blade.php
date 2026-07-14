@@ -100,7 +100,7 @@
                 <i class="fa-brands fa-facebook-f text-gray-700 text-lg"></i>
             </a>
 
-            <a href="https://www.instagram.com/nanohospitals/?hl=en"
+            <a href="https://www.instagram.com/nanohospitalsofficial?igsh=MTdlb2VkYmptaHl2"
                target="_blank"
                class="w-8 h-8 flex items-center justify-center
                       rounded-full bg-gray-200

@@ -24,7 +24,7 @@
             <h3 class="text-xl font-semibold text-gray-800 mb-2">Follow us on</h3>
             <p class="text-sm text-gray-500 mb-6">Stay connected with Nano Hospitals</p>
             <div class="flex flex-nowrap gap-3 justify-center overflow-x-auto">
-                <a href="https://www.instagram.com/nanohospitals/?hl=en" target="_blank" rel="noopener"
+                <a href="https://www.instagram.com/nanohospitalsofficial?igsh=MTdlb2VkYmptaHl2" target="_blank" rel="noopener"
                    class="w-14 h-14 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-red-500 hover:text-white transition">
                     <i class="fab fa-instagram text-2xl"></i>
                 </a>

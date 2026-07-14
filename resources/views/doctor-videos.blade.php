@@ -408,7 +408,7 @@
                         <i class="fa-brands fa-facebook-f text-gray-700 text-lg"></i>
                     </a>
 
-                    <a href="https://www.instagram.com/nanohospitals/?hl=en"
+                    <a href="https://www.instagram.com/nanohospitalsofficial?igsh=MTdlb2VkYmptaHl2"
                        target="_blank"
                        class="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 hover:scale-110 transition">
                         <i class="fa-brands fa-instagram text-gray-700 text-lg"></i>
