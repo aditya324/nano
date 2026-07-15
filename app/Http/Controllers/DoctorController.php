@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use App\Models\Speciality;
+use App\Services\ContentCache;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+    public function __construct(
+        private readonly ContentCache $contentCache,
+    ) {}
+
     private function facilityLocations(): array
     {
         return [
@@ -45,12 +50,7 @@ class DoctorController extends Controller
     {
         $doctor->load('speciality');
 
-        $relatedDoctors = Doctor::with('speciality')
-            ->where('speciality_id', $doctor->speciality_id)
-            ->where('id', '!=', $doctor->id)
-            ->latest()
-            ->take(4)
-            ->get();
+        $relatedDoctors = $this->relatedDoctors($doctor);
 
         $timezone = (string) config('services.karexpert.timezone', 'Asia/Kolkata');
         $slotDate = Carbon::parse($request->query('slot_date', now($timezone)->toDateString()), $timezone)->startOfDay();
@@ -69,12 +69,7 @@ class DoctorController extends Controller
         $timezone = (string) config('services.karexpert.timezone', 'Asia/Kolkata');
         $slotDate = Carbon::parse($request->query('slot_date', now($timezone)->toDateString()), $timezone)->startOfDay();
 
-        $relatedDoctors = Doctor::with('speciality')
-            ->where('speciality_id', $doctor->speciality_id)
-            ->where('id', '!=', $doctor->id)
-            ->latest()
-            ->take(4)
-            ->get();
+        $relatedDoctors = $this->relatedDoctors($doctor);
 
         return [
             'doctor' => $doctor,
@@ -83,6 +78,20 @@ class DoctorController extends Controller
             'facilityLocations' => $this->facilityLocations(),
             'doctorImage' => $this->doctorImageSrc($doctor),
         ];
+    }
+
+    private function relatedDoctors(Doctor $doctor)
+    {
+        return $this->contentCache->remember(
+            'doctors:related:'.$doctor->speciality_id.':exclude:'.$doctor->id,
+            ContentCache::TTL_SHORT,
+            fn () => Doctor::with('speciality')
+                ->where('speciality_id', $doctor->speciality_id)
+                ->where('id', '!=', $doctor->id)
+                ->latest()
+                ->take(4)
+                ->get()
+        );
     }
 
     public function index(Request $request)
@@ -122,10 +131,14 @@ class DoctorController extends Controller
         }
 
         $doctors = $query->paginate(10);
-        $specialities = Speciality::query()
-            ->where('is_active', true)
-            ->orderBy('name')
-            ->get();
+        $specialities = $this->contentCache->remember(
+            'specialities:active',
+            ContentCache::TTL_MEDIUM,
+            fn () => Speciality::query()
+                ->where('is_active', true)
+                ->orderBy('name')
+                ->get()
+        );
         $branches = config('hospitals.branches', []);
         $selectedBranch = collect((array) $request->location)->first();
         $selectedSpecialty = collect((array) $request->specialty)->first();

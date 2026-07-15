@@ -3,32 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\Condition;
+use App\Services\ContentCache;
 use Illuminate\Http\Request;
 
 class ConditionController extends Controller
 {
+    public function __construct(
+        private readonly ContentCache $contentCache,
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $query = Condition::where('is_active', true);
+        $search = trim((string) $request->input('search', ''));
+        $letter = (string) $request->input('letter', 'ALL');
+        $page = max(1, (int) $request->input('page', 1));
+        $cacheKey = sprintf(
+            'conditions:index:p%d:s%s:l%s',
+            $page,
+            md5($search),
+            $letter
+        );
 
-        // Search
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . trim($request->search) . '%');
-        }
+        $conditions = $this->contentCache->remember(
+            $cacheKey,
+            ContentCache::TTL_SHORT,
+            function () use ($request) {
+                $query = Condition::where('is_active', true);
 
-        // Alphabet filter
-        if ($request->filled('letter') && $request->letter !== 'ALL') {
-            $query->where('name', 'like', $request->letter . '%');
-        }
+                if ($request->filled('search')) {
+                    $query->where('name', 'like', '%'.trim($request->search).'%');
+                }
 
-        $conditions = $query
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->paginate(10)
-            ->withQueryString();
+                if ($request->filled('letter') && $request->letter !== 'ALL') {
+                    $query->where('name', 'like', $request->letter.'%');
+                }
+
+                return $query
+                    ->orderBy('sort_order')
+                    ->orderBy('name')
+                    ->paginate(10)
+                    ->withQueryString();
+            }
+        );
 
         return view('conditions.index', compact('conditions'));
     }
@@ -54,9 +73,12 @@ class ConditionController extends Controller
      */
     public function show($slug)
     {
-        $condition = Condition::with('faqs')
-            ->where('slug', $slug)
-            ->firstOrFail();
+        $condition = $this->contentCache->remember(
+            'condition:'.$slug,
+            ContentCache::TTL_MEDIUM,
+            fn () => Condition::with('faqs')->where('slug', $slug)->firstOrFail()
+        );
+
         return view('conditions.show', compact('condition'));
     }
 
@@ -83,7 +105,6 @@ class ConditionController extends Controller
     {
         //
     }
-
 
     public function searchableAs()
     {

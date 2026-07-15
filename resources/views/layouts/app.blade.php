@@ -27,7 +27,7 @@
     <meta property="og:description" content="@yield('meta_description', 'Nano Hospitals - Advanced Healthcare Services')">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Nano Hospitals">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:url" content="@yield('canonical', url()->current())">
     <link rel="canonical" href="@yield('canonical', url()->current())">
     <meta property="og:image" content="@yield('og_image', asset('assets/logo/logo.png'))">
 

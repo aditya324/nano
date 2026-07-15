@@ -9,17 +9,31 @@ use App\Models\HealthFacilityPage;
 use App\Models\HealthPackage;
 use App\Models\Procedure;
 use App\Models\Speciality;
+use App\Services\ContentCache;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 
 class SitemapController extends Controller
 {
+    public function __construct(
+        private readonly ContentCache $contentCache,
+    ) {}
+
     public function index(): Response
     {
         return response($this->buildXmlContent(), 200)->header('Content-Type', 'application/xml');
     }
 
     public function buildXmlContent(): string
+    {
+        return $this->contentCache->remember(
+            'sitemap:xml',
+            ContentCache::TTL_LONG,
+            fn () => $this->buildXmlContentUncached()
+        );
+    }
+
+    private function buildXmlContentUncached(): string
     {
         $baseUrl = rtrim((string) config('app.url'), '/');
         $urls = [];

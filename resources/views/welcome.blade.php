@@ -3,7 +3,7 @@
 @section('title', 'Best Multispeciality Hospital in Bangalore | Nano Hospitals BG Road & Uttarahalli')
 @section('meta_description', 'Best multispeciality hospital in Bangalore with 24x7 emergency care, NABH-accredited treatment, and expert specialists at BG Road and Uttarahalli for cardiology, orthopaedics, neurology, maternity, and cancer care.')
 
-@section('canonical', 'https://www.nanohospitals.in/')
+@section('canonical', rtrim(url('/'), '/').'/')
 
 @push('head')
 <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
@@ -14,16 +14,16 @@
 <meta property="og:site_name" content="Nano Hospitals" />
 @section('twitter_title', 'Best Multispeciality Hospital in Bangalore | Nano Hospitals')
 @section('twitter_description', 'Advanced multispeciality care in Bangalore with 24x7 emergency, top specialists, and NABH-accredited treatment at BG Road & Uttarahalli.')
-<meta property="og:url" content="https://www.nanohospitals.in" />
-<meta property="og:image" content="https://www.nanohospitals.in/assets/images/og-image.jpg" />
+<meta property="og:url" content="{{ url('/') }}" />
+<meta property="og:image" content="{{ url('/assets/images/og-image.jpg') }}" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Nano Hospitals Bangalore" />
 <meta name="twitter:description" content="Nano Hospitals provides advanced healthcare services in Bangalore with expert doctors, modern facilities, and patient-focused care." />
-<meta name="twitter:url" content="https://www.nanohospitals.in/" />
+<meta name="twitter:url" content="{{ url('/') }}" />
 <meta name="twitter:site" content="@nanohospitals" />
 <meta name="twitter:creator" content="@nanohospitals" />
-<meta name="twitter:image" content="https://www.nanohospitals.in/assets/images/og-image.jpg" />
+<meta name="twitter:image" content="{{ url('/assets/images/og-image.jpg') }}" />
     <script type="text/javascript">
         (function(c, l, a, r, i, t, y) {
             c[a] = c[a] || function() {
@@ -36,15 +36,16 @@
     <meta name="MobileOptimized" content="width" />
     <meta name="HandheldFriendly" content="true" />
     @php
+        $siteUrl = rtrim(url('/'), '/');
         $nanoPageSchema = [
     '@context' => 'https://schema.org',
     '@graph' => [
         [
             '@type' => ['Hospital', 'MedicalOrganization'],
-            '@id' => 'https://www.nanohospitals.in/#organization',
+            '@id' => $siteUrl . '/#organization',
             'name' => 'Nano Hospitals',
-            'url' => 'https://www.nanohospitals.in/',
-            'logo' => 'https://www.nanohospitals.in/assets/logo/logo.png',
+            'url' => $siteUrl . '/',
+            'logo' => $siteUrl . '/assets/logo/logo.png',
             'description' => 'Best multispeciality hospital in Bangalore offering cashless advanced medical care, 24x7 emergency services, top specialists, and NABH-accredited treatment.',
             'telephone' => '+91XXXXXXXXXX', // ← replace with real number
             'sameAs' => [
@@ -57,10 +58,10 @@
         ],
         [
             '@type' => ['Hospital', 'LocalBusiness'],
-            '@id' => 'https://www.nanohospitals.in/bg-road#location',
+            '@id' => $siteUrl . '/bg-road#location',
             'name' => 'Nano Hospitals - BG Road',
-            'parentOrganization' => ['@id' => 'https://www.nanohospitals.in/#organization'],
-            'url' => 'https://www.nanohospitals.in/bg-road',
+            'parentOrganization' => ['@id' => $siteUrl . '/#organization'],
+            'url' => $siteUrl . '/bg-road',
             'telephone' => '+91XXXXXXXXXX', // ← replace
             'address' => [
                 '@type' => 'PostalAddress',
@@ -85,10 +86,10 @@
         ],
         [
             '@type' => ['Hospital', 'LocalBusiness'],
-            '@id' => 'https://www.nanohospitals.in/uttarahalli#location',
+            '@id' => $siteUrl . '/uttarahalli#location',
             'name' => 'Nano Hospitals - Uttarahalli',
-            'parentOrganization' => ['@id' => 'https://www.nanohospitals.in/#organization'],
-            'url' => 'https://www.nanohospitals.in/uttarahalli',
+            'parentOrganization' => ['@id' => $siteUrl . '/#organization'],
+            'url' => $siteUrl . '/uttarahalli',
             'telephone' => '+91XXXXXXXXXX', // ← replace
             'address' => [
                 '@type' => 'PostalAddress',

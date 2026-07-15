@@ -11,7 +11,48 @@
 
     # Handle X-XSRF-Token Header
     RewriteCond %{HTTP:x-xsrf-token} .
-    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+    RewriteRule .* - [E=HTTP_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Apex → preferred www host (single hop to HTTPS)
+    RewriteCond %{HTTP_HOST} ^nanohospitals\.in$ [NC]
+    RewriteRule ^ https://www.nanohospitals.in%{REQUEST_URI} [L,R=301]
+
+    # HTTP www → HTTPS www (respect reverse proxies)
+    RewriteCond %{HTTP_HOST} ^www\.nanohospitals\.in$ [NC]
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteRule ^ https://www.nanohospitals.in%{REQUEST_URI} [L,R=301]
+
+    # Only redirect when the client literally requested /index.php (avoid front-controller loop)
+    RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+    RewriteRule ^index\.php$ / [L,R=301]
+
+    # Legacy .php URLs → clean Laravel paths
+    RewriteRule ^about\.php$ /about [L,R=301]
+    RewriteRule ^why-nano\.php$ /why-nano [L,R=301]
+    RewriteRule ^careers?\.php$ /careers [L,R=301]
+    RewriteRule ^bg-road\.php$ /bg-road [L,R=301]
+    RewriteRule ^hulimavu\.php$ /bg-road [L,R=301]
+    RewriteRule ^uttarahalli\.php$ /uttarahalli [L,R=301]
+    RewriteRule ^doctors\.php$ /doctors [L,R=301]
+    RewriteRule ^special(?:ities|ties)\.php$ /specialities [L,R=301]
+    RewriteRule ^conditions\.php$ /conditions [L,R=301]
+    RewriteRule ^procedures\.php$ /procedures [L,R=301]
+    RewriteRule ^blog\.php$ /blog [L,R=301]
+    RewriteRule ^news(?:-and-media)?\.php$ /news-and-media [L,R=301]
+    RewriteRule ^second-opinion\.php$ /second-opinion [L,R=301]
+    RewriteRule ^international-patients\.php$ /international-patients [L,R=301]
+    RewriteRule ^(?:patient-)?testimonials\.php$ /patient-testimonials [L,R=301]
+    RewriteRule ^doctor-videos\.php$ /doctor-videos [L,R=301]
+    RewriteRule ^health-packages\.php$ /health-packages [L,R=301]
+    RewriteRule ^health-facilities\.php$ /health-facilities [L,R=301]
+    RewriteRule ^basic(?:-health)?-package\.php$ /health-packages/basic-health-package [L,R=301]
+    RewriteRule ^pre-employment(?:-package)?\.php$ /health-packages/pre-employment-package [L,R=301]
+    RewriteRule ^master-health-package\.php$ /health-packages/master-health-package [L,R=301]
+    RewriteRule ^diabetic-health-package\.php$ /health-packages [L,R=301]
+    RewriteRule ^cancer-pac(?:ka|ak)ge\.php$ /health-packages [L,R=301]
+    RewriteRule ^fitness-package\.php$ /health-packages [L,R=301]
+    RewriteRule ^fertility-package\.php$ /health-packages [L,R=301]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
