@@ -15,6 +15,10 @@ class ForcePreferredHost
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if ($this->shouldSkipForLocalDevelopment($request)) {
+            return $next($request);
+        }
+
         $preferredHost = strtolower((string) config('seo.preferred_host'));
         $redirectHosts = array_map('strtolower', config('seo.redirect_hosts', []));
         $requestHost = strtolower($request->getHost());
@@ -37,5 +41,16 @@ class ForcePreferredHost
         $target = $scheme.'://'.$preferredHost.$request->getRequestUri();
 
         return redirect()->to($target, 301);
+    }
+
+    private function shouldSkipForLocalDevelopment(Request $request): bool
+    {
+        if (app()->environment('local', 'testing')) {
+            return true;
+        }
+
+        $host = strtolower($request->getHost());
+
+        return in_array($host, ['127.0.0.1', 'localhost', '[::1]'], true);
     }
 }

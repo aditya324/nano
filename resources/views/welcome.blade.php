@@ -1154,7 +1154,8 @@ $schema = [
                     style="background-image: url('./assets/background/Frame 134.png');"></div>
 
                 <!-- Default -->
-                <img loading="lazy" decoding="async" src="./assets/specialities/knee.webp" alt="Knee Replacement Surgery" />
+                <img loading="lazy" decoding="async" src="./assets/specialities/knee.webp" class="absolute left-18 top-1/2 -translate-y-1/2 h-[150px] object-contain z-10
+                transition-all duration-300 group-hover:opacity-0 group-hover:scale-95" alt="Knee Replacement Surgery" />
                     class="absolute left-15 top-1/2 -translate-y-1/2 h-[120px] object-contain z-10
                   transition-all duration-300 group-hover:opacity-0 group-hover:scale-95" />
 
@@ -1533,9 +1534,9 @@ $schema = [
                 style="background-image: url('./assets/background/Frame 134.png');"></div>
 
             <!-- Default -->
-            <img loading="lazy" decoding="async" src="{{ asset('assets/specialities/neck-and-back-pain.webp') }}" alt="Back and Neck Pain" />
-                class="absolute left-18 top-1/2 -translate-y-1/2 h-[100px] object-contain z-10
-  transition-all duration-300 group-hover:opacity-0 group-hover:scale-95" />
+            <img loading="lazy" decoding="async" src="{{ asset('assets/specialities/neck-and-back-pain.webp') }}"  class="absolute left-18 top-1/2 -translate-y-1/2 h-[100px] object-contain z-10
+            transition-all duration-300 group-hover:opacity-0 group-hover:scale-95"  alt="Back and Neck Pain" />
+               
 
             <div
                 class="absolute left-5 top-1/10 -translate-y-1/10 z-10
@@ -1549,10 +1550,10 @@ $schema = [
             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
                 <div class="absolute inset-0 bg-red-600/80"></div>
 
-                <img loading="lazy" decoding="async" src="{{ asset('assets/specialities/neck-and-back-pain.webp') }}" alt="Back and Neck Pain" />
-                    class="absolute right-12 top-1/2 -translate-y-1/2 h-[100px]
-    object-contain opacity-30 pointer-events-none
-    filter brightness-200 saturate-0" />
+                <img loading="lazy" decoding="async" class="absolute right-12 top-1/2 -translate-y-1/2 h-[100px]
+                object-contain opacity-30 pointer-events-none
+                filter brightness-200 saturate-0" src="{{ asset('assets/specialities/neck-and-back-pain.webp') }}" alt="Back and Neck Pain" />
+                     
 
                 <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                     <div>
@@ -1579,9 +1580,9 @@ $schema = [
             style="background-image: url('./assets/background/Frame 134.png');"></div>
 
         <!-- Default -->
-        <img loading="lazy" decoding="async" src="{{ asset('assets/specialities/hypertension.webp') }}" alt="Hypertension" />
-            class="absolute left-18 top-1/2 -translate-y-1/2 h-[120px] object-contain z-10
-transition-all duration-300 group-hover:opacity-0 group-hover:scale-95" />
+        <img loading="lazy" decoding="async" src="{{ asset('assets/specialities/hypertension.webp') }}" class="absolute left-18 top-1/2 -translate-y-1/2 h-[120px] object-contain z-10
+        transition-all duration-300 group-hover:opacity-0 group-hover:scale-95" alt="Hypertension" />
+            
 
         <div
             class="absolute left-18 top-1/10 -translate-y-1/10 z-10
@@ -2144,7 +2145,7 @@ filter brightness-200 saturate-0" />
             </div>
         </div>
     </section>
-    <section id="stats-section" class="w-full py-28">
+    <section    id="stats-section" class="w-full py-28">
         <div class="container mx-auto px-6">
 
             <h2 class="text-center text-2xl md:text-3xl font-semibold text-[#737373] mb-12">

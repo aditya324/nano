@@ -40,12 +40,23 @@ class RedirectLegacyPhpUrls
         $redirectHosts = array_map('strtolower', config('seo.redirect_hosts', []));
         $isManagedHost = $requestHost === $preferredHost || in_array($requestHost, $redirectHosts, true);
 
-        if ($isManagedHost && $preferredHost !== '') {
+        if ($isManagedHost && $preferredHost !== '' && ! $this->shouldSkipForLocalDevelopment($request)) {
             $scheme = config('seo.force_https', true) ? 'https' : $request->getScheme();
 
             return redirect()->away($scheme.'://'.$preferredHost.$target, 301);
         }
 
         return redirect()->to($target, 301);
+    }
+
+    private function shouldSkipForLocalDevelopment(Request $request): bool
+    {
+        if (app()->environment('local', 'testing')) {
+            return true;
+        }
+
+        $host = strtolower($request->getHost());
+
+        return in_array($host, ['127.0.0.1', 'localhost', '[::1]'], true);
     }
 }

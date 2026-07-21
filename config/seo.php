@@ -31,7 +31,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'force_https' => (bool) env('SEO_FORCE_HTTPS', true),
+    'force_https' => (bool) env('SEO_FORCE_HTTPS', env('APP_ENV', 'production') !== 'local'),
 
     /*
     |--------------------------------------------------------------------------
