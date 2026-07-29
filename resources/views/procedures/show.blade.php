@@ -155,15 +155,29 @@
         </section>
     @endif
 
+    @php
+        $hasRecovery = filled(trim(strip_tags((string) $procedure->long_term_outlook))) || !empty($procedure->recovery_timeline);
+        $hasRisks = !empty($procedure->surgery_risks) || !empty($procedure->post_op_care) || !empty($procedure->condition_risks);
+    @endphp
+
     {{-- STICKY NAV --}}
     <div class="sticky top-0 z-40 bg-white ">
         <div class="container-narrow flex gap-3 py-3 overflow-x-auto no-scrollbar">
-            <button class="pill-btn active" data-target="overview">Overview</button>
-            <button class="pill-btn" data-target="symptoms">Symptoms</button>
-            <button class="pill-btn" data-target="causes">Causes</button>
-            <button class="pill-btn" data-target="treatment">Treatment</button>
-            <button class="pill-btn" data-target="recovery">Recovery</button>
-            <button class="pill-btn" data-target="risks">Risks</button>
+            @if ($procedure->what_is)
+                <button class="pill-btn active" data-target="overview">Overview</button>
+            @endif
+            <button class="pill-btn" data-target="clinical-details" data-tab="tab-symptoms">Symptoms</button>
+            <button class="pill-btn" data-target="clinical-details" data-tab="tab-causes">Causes</button>
+            <button class="pill-btn" data-target="clinical-details" data-tab="tab-treatment">Treatment</button>
+            @if ($hasRecovery)
+                <button class="pill-btn" data-target="recovery">Recovery</button>
+            @endif
+            @if ($hasRisks)
+                <button class="pill-btn" data-target="risks">Risks</button>
+            @endif
+            @if ($procedureDoctors->count())
+                <button class="pill-btn" data-target="doctors">Doctors</button>
+            @endif
             @if ($procedure->faqs && $procedure->faqs->count())
                 <button class="pill-btn" data-target="faqs">FAQs</button>
             @endif
@@ -180,8 +194,8 @@
         </section>
     @endif
 
-    {{-- SYMPTOMS --}}
- <section class="section-spacing bg-white">
+    {{-- CLINICAL DETAILS: always show Symptoms / Causes / Treatment like Hip Replacement --}}
+ <section id="clinical-details" class="section-spacing bg-white scroll-mt-32">
     <div class="container-narrow">
         <h2 class="text-3xl font-semibold text-center mb-14 text-gray-900">
             Understanding The Procedure
@@ -241,7 +255,7 @@
                 <div id="tab-treatment" class="vtab-panel hidden">
                     <h3 class="text-xl font-semibold mb-4">Treatment Of {{ $procedure->title }}</h3>
 
-                    @if($procedure->treatment_overview)
+                    @if(filled(trim(strip_tags((string) $procedure->treatment_overview))))
                         <div class="prose max-w-none text-gray-700 mb-6">
                             {!! $procedure->treatment_overview !!}
                         </div>
@@ -273,37 +287,61 @@
    
 
     {{-- RECOVERY --}}
-    {{-- @if (!empty($procedure->recovery_timeline))
+    @if ($hasRecovery)
         <section id="recovery" class="section-spacing bg-[#f8fafc] scroll-mt-32">
             <div class="container-narrow">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Recovery Timeline</h2>
-                <div class="space-y-4">
-                    @foreach ($procedure->recovery_timeline as $stage)
-                        <div class="card-clean">
-                            <h4 class="font-semibold text-red-600">{{ $stage['stage'] }}</h4>
-                            <p class="text-gray-600">{{ $stage['details'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Recovery & Outlook</h2>
+                @if (!empty($procedure->recovery_timeline))
+                    <div class="space-y-4">
+                        @foreach ($procedure->recovery_timeline as $stage)
+                            @php
+                                $stageLabel = is_array($stage)
+                                    ? ($stage['stage'] ?? $stage['title'] ?? $stage['name'] ?? null)
+                                    : null;
+                                $stageDetails = is_array($stage)
+                                    ? ($stage['details'] ?? $stage['description'] ?? $stage['value'] ?? $stage['text'] ?? null)
+                                    : $stage;
+                            @endphp
+                            <div class="card-clean">
+                                @if ($stageLabel)
+                                    <h4 class="font-semibold text-red-600">{{ $stageLabel }}</h4>
+                                @endif
+                                @if ($stageDetails)
+                                    <p class="text-gray-600 {{ $stageLabel ? '' : 'flex gap-3' }}">
+                                        @unless ($stageLabel)
+                                            <span class="text-red-500 mt-1">⦾</span>
+                                        @endunless
+                                        <span>{{ $stageDetails }}</span>
+                                    </p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @elseif (filled(trim(strip_tags((string) $procedure->long_term_outlook))))
+                    <div class="card-clean prose max-w-none text-gray-700">
+                        {!! \Illuminate\Support\Str::startsWith(trim($procedure->long_term_outlook), '<') ? $procedure->long_term_outlook : '<p>'.$procedure->long_term_outlook.'</p>' !!}
+                    </div>
+                @endif
             </div>
         </section>
-    @endif --}}
+    @endif
 
     {{-- RISKS --}}
-   @if (!empty($procedure->surgery_risks) || !empty($procedure->post_op_care))
-<section class="section-spacing scroll-mt-32">
+   @if ($hasRisks)
+<section id="risks" class="section-spacing scroll-mt-32">
     <div class="container-narrow">
 
         <div class="grid md:grid-cols-2 gap-10">
 
             {{-- RISKS --}}
-            @if (!empty($procedure->surgery_risks))
+            @php $riskItems = !empty($procedure->surgery_risks) ? $procedure->surgery_risks : $procedure->condition_risks; @endphp
+            @if (!empty($riskItems))
                 <div>
                     <h2 class="text-2xl font-semibold text-red-600 mb-6 text-start md:text-left">
                         Risks
                     </h2>
                     <ul class="space-y-3">
-                        @foreach ($procedure->surgery_risks as $item)
+                        @foreach ($riskItems as $item)
                             <li class="flex items-start gap-3 text-gray-700">
                                 <span class="text-red-500 mt-1">⦾</span>
                                 <span>{{ $item['value'] ?? $item }}</span>
@@ -329,21 +367,46 @@
                     </ul>
                 </div>
             @endif
-
         </div>
-
     </div>
 </section>
-@endif
+   @endif
 
-
-
-     @if ($procedure->long_term_outlook)
-        <section id="overview" class="section-spacing scroll-mt-32 bg-gray-100">
+     @if ($procedure->conclusion)
+        <section class="section-spacing scroll-mt-32 bg-gray-100">
             <div class="container-narrow  bg-gray-100 ">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Long Term Outlook</h2>
-                <div class="prose max-w-none text-gray-700">{!! $procedure->long_term_outlook !!}</div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Conclusion</h2>
                 <div class="prose max-w-none text-gray-700">{!! $procedure->conclusion !!}</div>
+            </div>
+        </section>
+    @endif
+
+    @if ($procedureDoctors->count())
+        <section id="doctors" class="section-spacing bg-white scroll-mt-32">
+            <div class="container-narrow">
+                <div class="mx-auto max-w-3xl text-center">
+                    <h2 class="text-2xl font-semibold text-gray-800">
+                        Doctors Who Perform {{ $procedure->title }}
+                    </h2>
+                    <p class="mt-3 text-gray-600">
+                        Meet experienced {{ strtolower($relatedSpeciality?->name ?? 'specialist') }} doctors who regularly evaluate and perform {{ strtolower($procedure->title) }}.
+                    </p>
+                </div>
+
+                <div class="mt-32 flex flex-wrap justify-center gap-32 md:gap-8 lg:gap-16 xl:gap-20">
+                    @foreach ($procedureDoctors as $doctor)
+                        <x-democard :doctor="$doctor" />
+                    @endforeach
+                </div>
+
+                @if ($relatedSpeciality)
+                    <div class="mt-12 text-center">
+                        <a href="{{ route('specialities.show', $relatedSpeciality->slug) }}#doctors"
+                            class="inline-flex items-center rounded-full border border-red-200 px-6 py-3 text-sm font-semibold text-red-600 transition hover:bg-red-50">
+                            View all {{ $relatedSpeciality->name }} doctors
+                        </a>
+                    </div>
+                @endif
             </div>
         </section>
     @endif
@@ -420,6 +483,17 @@
             pillButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const target = document.getElementById(btn.dataset.target);
+                    if (!target) return;
+
+                    if (btn.dataset.tab) {
+                        document.querySelectorAll('.vtab-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('.vtab-panel').forEach(panel => panel.classList.add('hidden'));
+                        const vtabBtn = document.querySelector(`.vtab-btn[data-tab="${btn.dataset.tab}"]`);
+                        const panel = document.getElementById(btn.dataset.tab);
+                        if (vtabBtn) vtabBtn.classList.add('active');
+                        if (panel) panel.classList.remove('hidden');
+                    }
+
                     window.scrollTo({
                         top: target.offsetTop - 100,
                         behavior: 'smooth'
@@ -434,7 +508,11 @@
                     const sectionTop = section.offsetTop - 150;
                     if (window.scrollY >= sectionTop) current = section.id;
                 });
-                pillButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.target === current));
+                pillButtons.forEach(btn => {
+                    const isActive = btn.dataset.target === current;
+                    // Keep Symptoms/Causes/Treatment pills tied to clinical-details section
+                    btn.classList.toggle('active', isActive && (!btn.dataset.tab || btn.dataset.tab === 'tab-symptoms'));
+                });
             });
         });
     </script>

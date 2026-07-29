@@ -514,6 +514,7 @@
             document.querySelectorAll('.faq-question').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const ans = btn.parentElement.querySelector('.faq-answer');
+                    const ans = btn.parentElement.querySelector('.faq-answer');
                     const icon = btn.querySelector('span');
                     ans.classList.toggle('hidden');
                     icon.textContent = ans.classList.contains('hidden') ? '+' : '−';

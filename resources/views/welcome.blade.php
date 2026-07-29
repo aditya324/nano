@@ -944,8 +944,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4">Bone & Joint Care</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Advanced diagnosis and treatment for bone, joint
-                                and musculoskeletal disorders.</p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['bone-joint-care'] ?? 'Advanced diagnosis and treatment for bone, joint and musculoskeletal disorders.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -988,8 +987,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4">Child Care</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Compassionate pediatric care focused on the
-                                health, growth, and well-being of children.</p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['child-care-paediatrics'] ?? 'Compassionate pediatric care focused on the health, growth, and well-being of children.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1032,8 +1030,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4">Women’s Care</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive healthcare services addressing
-                                women’s health needs across all life stages.</p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['women-care-obstetrics'] ?? 'Comprehensive healthcare services addressing women’s health needs across all life stages.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1076,8 +1073,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4">General Medicine</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive healthcare services addressing
-                                women’s health needs across all life stages.</p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['general-medicine'] ?? 'Expert physician care for diagnosis, treatment, and prevention of common and complex adult health conditions.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1122,8 +1118,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4">Brain Care</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive healthcare services addressing
-                                brain care needs across all life stages.</p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['brain-care'] ?? 'Specialised neurology care for stroke, epilepsy, migraine, neuropathy, and other brain and nervous system conditions.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1179,8 +1174,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold text-center mb-2"> Knee Replacement <br> Surgery</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive orthopedic care focused on
-                                restoring knee function, relieving pain, and improving mobility at every stage of life</p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['knee-replacement-surgery'] ?? 'Comprehensive orthopedic care focused on restoring knee function, relieving pain, and improving mobility.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1224,9 +1218,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4 text-center">Hip Replacement Surgery</h3>
-                                <p class="text-sm leading-relaxed opacity-95">Comprehensive eye care focused on restoring clear
-                                    vision and improving quality of life through safe, precise, and advanced cataract surgery.
-                            </p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['hip-replacement-surgery'] ?? 'Advanced hip replacement care to relieve severe hip pain, restore joint movement, and help you return to daily activity.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1269,9 +1261,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4">Spinal Surgery</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive spinal care focused on restoring
-                                spinal function, relieving pain, and improving mobility at every stage of life
-                            </p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['spinal-surgery'] ?? 'Surgical care for herniated discs, spinal stenosis, and related spine conditions to relieve pain and improve mobility.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1315,10 +1305,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4">Cesarean Section</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive cesarean section care focused on
-                                restoring cesarean section function, relieving pain, and improving mobility at every stage
-                                of life
-                            </p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['cesarean-section'] ?? 'Safe C-section delivery with experienced obstetricians and advanced maternity care for mother and baby.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1360,11 +1347,8 @@ $schema = [
 
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
-                            <h3 class="text-2xl font-semibold mb-4 text-center">Kidney Procedure</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive kidney procedure care focused on
-                                restoring kidney procedure function, relieving pain, and improving mobility at every stage
-                                of life
-                            </p>
+                            <h3 class="text-2xl font-semibold mb-4 text-center">Kidney Surgery</h3>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['kidney-surgery'] ?? 'Specialised kidney surgery for stones, cysts, tumours, and other urological conditions requiring precise operative care.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1418,10 +1402,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4 text-center">Heart Disease</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive heart disease care focused on
-                                restoring heart disease function, relieving pain, and improving mobility at every stage of
-                                life
-                            </p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['heart-disease'] ?? 'Advanced cardiac care for coronary artery disease and related heart conditions, focused on stronger long-term heart health.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1466,10 +1447,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4 text-center">Osteoarthritis</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive osteoarthritis care focused on
-                                restoring osteoarthritis function, relieving pain, and improving mobility at every stage of
-                                life
-                            </p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['osteoarthritis'] ?? 'Orthopedic care for joint pain and cartilage wear, with treatment options to relieve pain and restore everyday mobility.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1512,10 +1490,7 @@ $schema = [
                     <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-semibold mb-4 text-center">Gallstones</h3>
-                            <p class="text-sm leading-relaxed opacity-95">Comprehensive back and neck pain care focused on
-                                restoring gallstones function, relieving pain, and improving mobility at every stage of
-                                life
-                            </p>
+                            <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['gallstones'] ?? 'Expert gastrointestinal care for gallstones, abdominal pain, and related bile duct problems with lasting relief in mind.' }}</p>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -1558,10 +1533,7 @@ $schema = [
                 <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                     <div>
                         <h3 class="text-2xl font-semibold mb-4 text-center">Back and Neck Pain</h3>
-                        <p class="text-sm leading-relaxed opacity-95">Comprehensive back and neck pain care focused on
-                            restoring back and neck pain function, relieving pain, and improving mobility at every stage of
-                            life
-                        </p>
+                        <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['back-and-neck-pain'] ?? 'Spine specialist care for chronic back and neck pain, focused on personalised relief and faster return to comfort.' }}</p>
                     </div>
 
                     <div class="flex items-center justify-between">
@@ -1604,10 +1576,7 @@ filter brightness-200 saturate-0" />
             <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
                 <div>
                     <h3 class="text-2xl font-semibold mb-4 text-center">Hypertension</h3>
-                    <p class="text-sm leading-relaxed opacity-95">Comprehensive hypertension care focused on
-                        restoring hypertension function, relieving pain, and improving mobility at every stage of
-                        life
-                    </p>
+                    <p class="text-sm leading-relaxed opacity-95">{{ $homeTeasers['hypertension-high-blood-pressure'] ?? 'Personalised high blood pressure care to protect your heart, kidneys, and long-term cardiovascular health.' }}</p>
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -1632,6 +1601,71 @@ filter brightness-200 saturate-0" />
 
     </section>
 
+    <section class="w-full py-10 bg-[#f9f9f9]">
+        <div class="max-w-4xl mx-auto text-center mb-10">
+            <h2 class="text-2xl font-semibold text-[#737373]">
+                Latest Health
+                <span class="text-red-500 font-semibold">Articles</span>
+            </h2>
+            <p class="mt-3 text-sm text-gray-500 max-w-2xl mx-auto">
+                Expert health insights, treatment guides, and wellness tips from our medical team.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-y-10 gap-10 mt-6 md:px-28">
+            @forelse ($latestBlogs as $blog)
+                <a href="{{ route('blogs.show', $blog->slug) }}"
+                    class="group relative w-[260px] h-[360px] rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white">
+
+                    <div class="absolute inset-0 bg-cover bg-no-repeat"
+                        style="background-image: url('./assets/background/Frame 134.png');"></div>
+
+                    @if($blog->featured_image)
+                        <img loading="lazy" decoding="async"
+                            src="{{ asset('storage/' . $blog->featured_image) }}"
+                            alt="{{ $blog->title }}"
+                            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[200px] w-[200px] object-cover rounded-xl z-10
+                            transition-all duration-300 group-hover:opacity-0 group-hover:scale-95" />
+                    @endif
+
+                    <div class="absolute inset-x-0 bottom-0 p-5 z-10
+                        transition-opacity duration-300 group-hover:opacity-0">
+                        <h3 class="text-red-500 font-semibold text-base leading-snug line-clamp-3">
+                            {{ $blog->title }}
+                        </h3>
+                    </div>
+
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                        <div class="absolute inset-0 bg-red-600/80"></div>
+
+                        <div class="relative z-20 h-full p-6 text-white flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold mb-4 line-clamp-3">{{ $blog->title }}</h3>
+                                <p class="text-sm leading-relaxed opacity-95 line-clamp-4">
+                                    {{ $blog->excerpt ?? 'Read our latest health article from Nano Hospitals.' }}
+                                </p>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">Read Article</span>
+                                <span class="w-10 h-10 flex items-center justify-center rounded-full border border-white">→</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @empty
+                <p class="text-center text-gray-500 w-full">Health articles coming soon.</p>
+            @endforelse
+        </div>
+
+        <div class="flex justify-center mt-10">
+            <a href="{{ route('blogs.index') }}"
+                class="inline-flex items-center gap-2 font-semibold text-red-500 hover:text-red-600 transition">
+                View All Articles
+                <span class="w-8 h-8 flex items-center justify-center rounded-full border border-red-500 text-sm">→</span>
+            </a>
+        </div>
+    </section>
 
     <section class="w-full py-20 bg-white">
         <div class="container mx-auto px-4">
@@ -2275,7 +2309,7 @@ filter brightness-200 saturate-0" />
                         <img loading="lazy" decoding="async" loading="lazy" src="./assets/icons/doctors.webp" class="mx-auto h-12" alt="">
 
                         <p class="counter text-4xl font-bold text-red-500 group-hover:text-white" data-target="150"
-                            data-suffix="+">0</p>
+                            data-suffix="+">150</p>
 
                         <p class="text-red-500 text-xl font-medium group-hover:text-white">Doctors</p>
                         <p class="text-gray-400 text-xl group-hover:text-white">Here to Heal</p>
@@ -2387,9 +2421,13 @@ filter brightness-200 saturate-0" />
           </div>
       
           <!-- Tabs -->
-          <div class="flex flex-wrap justify-center gap-4 mb-10">
+          <div class="flex flex-wrap justify-center gap-4 mb-10" role="tablist" aria-label="Insurance partners by branch">
             <button
+              type="button"
               id="uttarahalliTab"
+              role="tab"
+              aria-selected="true"
+              aria-controls="uttarahalliContent"
               onclick="showInsuranceTab('uttarahalli')"
               class="insurance-tab active-tab px-7 py-3 rounded-xl font-semibold transition-all duration-300 shadow-sm hover:shadow-md bg-red-500 text-white"
             >
@@ -2397,7 +2435,11 @@ filter brightness-200 saturate-0" />
             </button>
       
             <button
+              type="button"
               id="bgroadTab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="bgroadContent"
               onclick="showInsuranceTab('bgroad')"
               class="insurance-tab px-7 py-3 rounded-xl font-semibold transition-all duration-300 shadow-sm hover:shadow-md bg-white border border-gray-300 text-gray-700"
             >
@@ -2408,6 +2450,9 @@ filter brightness-200 saturate-0" />
           <!-- Uttarahalli Content -->
           <div
             id="uttarahalliContent"
+            role="tabpanel"
+            aria-labelledby="uttarahalliTab"
+            data-insurance-panel="uttarahalli"
             class="insurance-content bg-white rounded-2xl shadow-lg border border-gray-200 p-8"
           >
       
@@ -2416,7 +2461,7 @@ filter brightness-200 saturate-0" />
                 Uttarahalli Branch Insurance Partners
               </h3>
       
-              <span class="bg-red-100 text-red-500 text-sm font-semibold px-4 py-2 rounded-full">
+              <span data-partner-count class="bg-red-100 text-red-500 text-sm font-semibold px-4 py-2 rounded-full">
                 25 Partners
               </span>
             </div>
@@ -2455,7 +2500,11 @@ filter brightness-200 saturate-0" />
           <!-- BG Road Content -->
           <div
             id="bgroadContent"
-            class="insurance-content hidden bg-white rounded-2xl shadow-lg border border-gray-200 p-8"
+            role="tabpanel"
+            aria-labelledby="bgroadTab"
+            data-insurance-panel="bgroad"
+            hidden
+            class="insurance-content bg-white rounded-2xl shadow-lg border border-gray-200 p-8"
           >
       
             <div class="flex items-center justify-between mb-8">
@@ -2463,7 +2512,7 @@ filter brightness-200 saturate-0" />
                 BG Road Branch Insurance Partners
               </h3>
       
-              <span class="bg-red-100 text-red-500 text-sm font-semibold px-4 py-2 rounded-full">
+              <span data-partner-count class="bg-red-100 text-red-500 text-sm font-semibold px-4 py-2 rounded-full">
                 26 Partners
               </span>
             </div>
@@ -2566,40 +2615,59 @@ filter brightness-200 saturate-0" />
     </div>
     
     
+    <style>
+        .insurance-content[hidden] {
+            display: none !important;
+        }
+    </style>
     <script>
         function showInsuranceTab(branch) {
-            const uttarahalliContent = document.getElementById("uttarahalliContent");
-            const bgroadContent = document.getElementById("bgroadContent");
-            const uttarahalliTab = document.getElementById("uttarahalliTab");
-            const bgroadTab = document.getElementById("bgroadTab");
+            const panels = {
+                uttarahalli: document.getElementById("uttarahalliContent"),
+                bgroad: document.getElementById("bgroadContent"),
+            };
+            const tabs = {
+                uttarahalli: document.getElementById("uttarahalliTab"),
+                bgroad: document.getElementById("bgroadTab"),
+            };
 
-            if (!uttarahalliContent || !bgroadContent || !uttarahalliTab || !bgroadTab) return;
+            if (!panels.uttarahalli || !panels.bgroad || !tabs.uttarahalli || !tabs.bgroad) return;
 
             const activeTabClasses = ["bg-red-500", "text-white"];
             const inactiveTabClasses = ["bg-white", "border", "border-gray-300", "text-gray-700"];
+            const activeBranch = branch === "bgroad" ? "bgroad" : "uttarahalli";
 
-            if (branch === "bgroad") {
-                uttarahalliContent.classList.add("hidden");
-                bgroadContent.classList.remove("hidden");
+            Object.keys(panels).forEach((key) => {
+                const isActive = key === activeBranch;
+                const panel = panels[key];
+                const tab = tabs[key];
 
-                uttarahalliTab.classList.remove(...activeTabClasses);
-                uttarahalliTab.classList.add(...inactiveTabClasses);
+                // Native hidden attribute uses display:none !important in the stylesheet
+                panel.hidden = !isActive;
+                panel.setAttribute("aria-hidden", String(!isActive));
 
-                bgroadTab.classList.remove(...inactiveTabClasses);
-                bgroadTab.classList.add(...activeTabClasses);
-            } else {
-                bgroadContent.classList.add("hidden");
-                uttarahalliContent.classList.remove("hidden");
+                tab.setAttribute("aria-selected", String(isActive));
+                tab.classList.toggle("active-tab", isActive);
 
-                bgroadTab.classList.remove(...activeTabClasses);
-                bgroadTab.classList.add(...inactiveTabClasses);
-
-                uttarahalliTab.classList.remove(...inactiveTabClasses);
-                uttarahalliTab.classList.add(...activeTabClasses);
-            }
+                if (isActive) {
+                    tab.classList.remove(...inactiveTabClasses);
+                    tab.classList.add(...activeTabClasses);
+                } else {
+                    tab.classList.remove(...activeTabClasses);
+                    tab.classList.add(...inactiveTabClasses);
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("[data-insurance-panel]").forEach((panel) => {
+                const count = panel.querySelectorAll(".insurance-card").length;
+                const badge = panel.querySelector("[data-partner-count]");
+                if (badge) {
+                    badge.textContent = count + " Partner" + (count === 1 ? "" : "s");
+                }
+            });
+
             showInsuranceTab("uttarahalli");
         });
     </script>

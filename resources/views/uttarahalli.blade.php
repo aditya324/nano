@@ -274,7 +274,7 @@
                                         <!-- Slide -->
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h21m48s134.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h48m30s534.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
 
                                                 <div class="absolute "></div>
@@ -293,7 +293,7 @@
 
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h22m45s978.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h50m04s962.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute"></div>
 
@@ -311,8 +311,8 @@
 
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h24m46s285.webp "
-                                                    alt="Patient Success Story" class=w-full h-[320px] object-cover" />
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h51m04s040.webp"
+                                                    alt="Patient Success Story" class="w-full h-[320px] object-cover" />
                                                 <div class="absolute "></div>
 
                                                 <!-- <div class="absolute inset-0 flex items-center justify-center">
@@ -328,7 +328,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h25m09s540.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h51m41s691.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -345,7 +345,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h28m24s049.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h51m49s397.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -362,7 +362,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h29m38s762.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h52m27s246.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -379,7 +379,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h30m10s843.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h52m34s931.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -396,7 +396,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h30m49s355.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h52m41s452.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -413,7 +413,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h31m35s311.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h53m07s646.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -430,7 +430,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h32m00s868.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h53m21s991.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -447,7 +447,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h36m43s038.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h53m37s210.webp"
                                                     alt="Patient Success Story" class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
 
@@ -464,7 +464,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h39m07s921.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h54m13s003.webp"
                                                     alt="Patient Success Story" alt="Patient Success Story"
                                                     class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
@@ -482,7 +482,7 @@
                                         </div>
                                         <div class="swiper-slide">
                                             <div class="relative rounded-3xl overflow-hidden">
-                                                <img src="./assets/hulimavu/vlcsnap-2026-01-06-13h39m36s278.webp"
+                                                <img src="./assets/uttarahalli/gallary-uttarahalli/vlcsnap-2026-01-06-13h54m52s344.webp"
                                                     alt="Patient Success Story" alt="Patient Success Story"
                                                     class="w-full h-[320px]  object-cover" />
                                                 <div class="absolute "></div>
@@ -589,7 +589,7 @@
                                 <div class="bg-white rounded-3xl shadow-md overflow-hidden text-center">
 
                                     <!-- Image (top only rounded) -->
-                                    <img src="./assets/uttarahalli/dialysis (1).webp" alt="24×7 Dialysis"
+                                    <img src="./assets/facilities/dialysis.webp" alt="24×7 Dialysis"
                                         class="w-full h-[220px] object-cover block rounded-t-3xl" />
 
                                     <!-- Bottom content -->
@@ -605,7 +605,7 @@
                                 <div class="bg-white rounded-3xl shadow-md overflow-hidden text-center">
 
                                     <!-- Image (top only rounded) -->
-                                    <img src="./assets/uttarahalli/ambulance.webp" alt="24×7 Emergency Services"
+                                    <img src="./assets/facilities/ambulance.webp" alt="24×7 Emergency Services"
                                         class="w-full h-[220px] object-cover block rounded-t-3xl" />
 
                                     <!-- Bottom content -->
@@ -621,7 +621,7 @@
                                 <div class="bg-white rounded-3xl shadow-md overflow-hidden text-center">
 
                                     <!-- Image (top only rounded) -->
-                                    <img src="./assets/uttarahalli/pharmacy.webp" alt="24×7 Pharmacy"
+                                    <img src="./assets/facilities/pharmacy.webp" alt="24×7 Pharmacy"
                                         class="w-full h-[220px] object-cover block rounded-t-3xl" />
 
                                     <!-- Bottom content -->

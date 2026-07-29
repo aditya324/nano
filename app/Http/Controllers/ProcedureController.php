@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Procedure;
+use App\Models\Speciality;
 use App\Services\ContentCache;
 use Illuminate\Http\Request;
 
@@ -47,16 +48,45 @@ class ProcedureController extends Controller
 
     public function show($slug)
     {
-        $procedure = $this->contentCache->remember(
-            'procedure:'.$slug,
+        $payload = $this->contentCache->remember(
+            'procedure:'.$slug.':v2',
             ContentCache::TTL_MEDIUM,
-            fn () => Procedure::with('faqs')
-                ->where('slug', $slug)
-                ->where('is_active', true)
-                ->firstOrFail()
+            function () use ($slug) {
+                $procedure = Procedure::with('faqs')
+                    ->where('slug', $slug)
+                    ->where('is_active', true)
+                    ->firstOrFail();
+
+                $procedureUrl = '/procedures/' . $procedure->slug;
+
+                $relatedSpeciality = Speciality::query()
+                    ->where('is_active', true)
+                    ->where(function ($query) use ($procedureUrl) {
+                        $query
+                            ->where('about_intro', 'like', '%' . $procedureUrl . '%')
+                            ->orWhere('about_more', 'like', '%' . $procedureUrl . '%')
+                            ->orWhere('overview_content', 'like', '%' . $procedureUrl . '%')
+                            ->orWhere('treatments_content', 'like', '%' . $procedureUrl . '%')
+                            ->orWhere('conditions_content', 'like', '%' . $procedureUrl . '%')
+                            ->orWhere('subspecialties_content', 'like', '%' . $procedureUrl . '%');
+                    })
+                    ->with([
+                        'doctors' => fn ($query) => $query
+                            ->with('speciality')
+                            ->latest()
+                            ->take(3),
+                    ])
+                    ->first();
+
+                return [
+                    'procedure' => $procedure,
+                    'relatedSpeciality' => $relatedSpeciality,
+                    'procedureDoctors' => $relatedSpeciality?->doctors ?? collect(),
+                ];
+            }
         );
 
-        return view('procedures.show', compact('procedure'));
+        return view('procedures.show', $payload);
     }
 
     public function searchableAs()

@@ -12,12 +12,15 @@ onReady(() => {
 
     if (branchBtn && branchMenu) {
         branchBtn.addEventListener("click", () => {
+            const isOpen = !branchMenu.classList.contains("hidden");
             branchMenu.classList.toggle("hidden");
+            branchBtn.setAttribute("aria-expanded", isOpen ? "false" : "true");
         });
 
         document.addEventListener("click", (event) => {
             if (!branchBtn.contains(event.target) && !branchMenu.contains(event.target)) {
                 branchMenu.classList.add("hidden");
+                branchBtn.setAttribute("aria-expanded", "false");
             }
         });
     }
@@ -60,6 +63,7 @@ onReady(() => {
         mobileHospitalToggle.addEventListener("click", () => {
             const isHidden = mobileHospitalMenu.classList.contains("hidden");
             mobileHospitalMenu.classList.toggle("hidden");
+            mobileHospitalToggle.setAttribute("aria-expanded", isHidden ? "true" : "false");
             if (mobileHospitalChevron) {
                 mobileHospitalChevron.classList.toggle("rotate-180", isHidden);
             }

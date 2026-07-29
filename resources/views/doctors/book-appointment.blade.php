@@ -55,7 +55,7 @@
                                 <option value="">Please Select Branch</option>
                                 @foreach ($branches as $key => $branch)
                                     <option value="{{ $key }}" {{ $selectedBranch === $key ? 'selected' : '' }}>
-                                        {{ $key === 'Hulimavu' ? 'BG Road' : $branch['label'] }}
+                                        {{ $branch['label'] }}
                                     </option>
                                 @endforeach
                             </select>

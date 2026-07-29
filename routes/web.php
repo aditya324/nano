@@ -12,6 +12,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\RequestCallController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SpecialityController;
+use App\Models\Blog;
 use App\Models\Condition;
 use App\Models\Doctor;
 use App\Models\Procedure;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 Route::get('/', function (ContentCache $contentCache) {
-    $payload = $contentCache->remember('home:featured', ContentCache::TTL_SHORT, function () {
+    $payload = $contentCache->remember('home:featured:v2', ContentCache::TTL_SHORT, function () {
         $primaryFeaturedDoctor = Doctor::with('speciality')
             ->where('slug', 'dr-mohan-m-r')
             ->first();
@@ -39,11 +40,83 @@ Route::get('/', function (ContentCache $contentCache) {
             $featuredDoctors = collect([$primaryFeaturedDoctor])->concat($featuredDoctors);
         }
 
+        $teaser = static function (?string ...$candidates): string {
+            foreach ($candidates as $candidate) {
+                $text = trim(preg_replace(
+                    '/\s+/u',
+                    ' ',
+                    html_entity_decode(strip_tags((string) $candidate), ENT_QUOTES | ENT_HTML5, 'UTF-8')
+                ) ?? '');
+
+                if ($text !== '') {
+                    return \Illuminate\Support\Str::limit($text, 140);
+                }
+            }
+
+            return '';
+        };
+
+        $featuredSpecialitySlugs = [
+            'bone-joint-care',
+            'child-care-paediatrics',
+            'women-care-obstetrics',
+            'general-medicine',
+            'brain-care',
+        ];
+        $featuredProcedureSlugs = [
+            'knee-replacement-surgery',
+            'hip-replacement-surgery',
+            'spinal-surgery',
+            'cesarean-section',
+            'kidney-surgery',
+        ];
+        $featuredConditionSlugs = [
+            'heart-disease',
+            'osteoarthritis',
+            'gallstones',
+            'back-and-neck-pain',
+            'hypertension-high-blood-pressure',
+        ];
+
+        $homeTeasers = [];
+
+        Speciality::query()
+            ->whereIn('slug', $featuredSpecialitySlugs)
+            ->get(['slug', 'meta_description', 'about_intro'])
+            ->each(function (Speciality $speciality) use (&$homeTeasers, $teaser) {
+                $homeTeasers[$speciality->slug] = $teaser(
+                    $speciality->meta_description,
+                    $speciality->about_intro
+                );
+            });
+
+        Procedure::query()
+            ->whereIn('slug', $featuredProcedureSlugs)
+            ->get(['slug', 'seo_description', 'introduction'])
+            ->each(function (Procedure $procedure) use (&$homeTeasers, $teaser) {
+                $homeTeasers[$procedure->slug] = $teaser(
+                    $procedure->seo_description,
+                    $procedure->introduction
+                );
+            });
+
+        Condition::query()
+            ->whereIn('slug', $featuredConditionSlugs)
+            ->get(['slug', 'meta_description', 'about'])
+            ->each(function (Condition $condition) use (&$homeTeasers, $teaser) {
+                $homeTeasers[$condition->slug] = $teaser(
+                    $condition->meta_description,
+                    $condition->about
+                );
+            });
+
         return [
-            'specialities' => Speciality::orderBy('name')->limit(4)->get(),
-            'procedures' => Procedure::orderBy('title')->limit(4)->get(),
-            'conditions' => Condition::orderBy('name')->limit(4)->get(),
+            'homeTeasers' => $homeTeasers,
             'featuredDoctors' => $featuredDoctors,
+            'latestBlogs' => Blog::where('is_published', true)
+                ->orderByDesc('published_at')
+                ->limit(4)
+                ->get(['id', 'title', 'slug', 'excerpt', 'featured_image', 'published_at']),
         ];
     });
 

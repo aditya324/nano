@@ -9,7 +9,7 @@
         <div class="container mx-auto px-6">
 
             <!-- Top Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
 
                 <!-- Column 1 -->
                 <div>
@@ -37,7 +37,19 @@
                     </ul>
                 </div>
 
-                <!-- Column 3 (Accreditations) -->
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Conditions</h3>
+                    <ul class="space-y-2 text-sm text-gray-200">
+                        <li><a href="{{ route('conditions.show', 'diabetes') }}" class="hover:text-white">Diabetes</a></li>
+                        <li><a href="{{ route('conditions.show', 'osteoarthritis') }}" class="hover:text-white">Osteoarthritis</a></li>
+                        <li><a href="{{ route('conditions.show', 'hypertension-high-blood-pressure') }}" class="hover:text-white">Hypertension</a></li>
+                        <li><a href="{{ route('conditions.show', 'chronic-kidney-disease') }}" class="hover:text-white">Chronic Kidney Disease</a></li>
+                        <li><a href="{{ route('conditions.show', 'heart-disease') }}" class="hover:text-white">Heart Disease</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 (Accreditations) -->
                 <div>
                     <h3 class="font-semibold text-lg mb-4">Medical accreditations</h3>
                     <div class="flex items-center gap-6">
@@ -47,7 +59,7 @@
                     </div>
                 </div>
 
-                <!-- Column 4 -->
+                <!-- Column 5 -->
                 <div>
                     <h3 class="font-semibold text-lg mb-4">Corporate</h3>
                     <ul class="space-y-2 text-sm text-gray-200">
@@ -55,6 +67,7 @@
                         <li><a href="{{ route('news') }}" class="hover:text-white">News & Media Relations</a></li>
                         <li><a href="{{ route('careers') }}" class="hover:text-white">Careers</a></li>
                         <li><a href="{{ route('second.opinion') }}" class="hover:text-white">Second Opinion</a></li>
+                        <li><a href="{{ route('blogs.index') }}" class="hover:text-white">Health Blog</a></li>
                     </ul>
                 </div>
 

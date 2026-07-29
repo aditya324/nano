@@ -1,3 +1,12 @@
+    @php
+        $navBranches = config('hospitals.nav', [
+            ['key' => 'bg-road', 'label' => 'BG Road', 'route' => 'bg-road'],
+            ['key' => 'uttarahalli', 'label' => 'Uttarahalli', 'route' => 'uttarahalli'],
+        ]);
+        $currentNavBranch = collect($navBranches)->firstWhere('route', Route::currentRouteName());
+        $currentBranchLabel = $currentNavBranch['label'] ?? null;
+    @endphp
+
     <nav class="fixed top-0 left-0 w-full ">
 
         <!-- ================= TOP GREY BAR ================= -->
@@ -64,32 +73,34 @@
                         <div class="relative inline-block lg:ml-10">
                             <!-- Trigger Button -->
                             <button id="hospitalDropdownBtn" type="button"
+                                aria-haspopup="listbox"
+                                aria-expanded="false"
+                                aria-label="Pick branch"
                                 class="border border-red-400 text-red-500 px-3 py-1.5 rounded-full text-xs font-medium
            flex items-center gap-1 whitespace-nowrap">
-                                Pick Branches
+                                <span id="hospitalDropdownLabel">{{ $currentBranchLabel ?? 'Pick Branch' }}</span>
                                 <span class="text-[10px]">▾</span>
                             </button>
 
-                            <!-- Dropdown Menu -->
+                            <!-- Dropdown Menu — same branch list as mobile "Pick Hospital" -->
                             <div id="hospitalDropdownMenu"
-                                class="absolute right-0 mt-2 w-44
+                                role="listbox"
+                                class="absolute left-0 mt-2 w-48
            bg-white border border-gray-200 rounded-lg shadow-lg
-           hidden z-50">
-                                <a href="{{ route('bg-road') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700
-             hover:bg-red-50 hover:text-red-500">
-                                    <div class="flex justify-start gap-5"> <img loading="lazy" decoding="async" src="{{ asset('assets/icons/Vector (4).png') }}"
-                                            alt="">
-                                        BG Road</div>
-                                </a>
-
-                                <a href="{{ route('uttarahalli') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700
-             hover:bg-red-50 hover:text-red-500">
-                                    <div class="flex justify-start gap-5"> <img loading="lazy" decoding="async" src="{{ asset('assets/icons/Vector (4).png') }}"
-                                            alt="">
-                                        Uttarahalli</div>
-                                </a>
+           hidden z-[9999]">
+                                @foreach ($navBranches as $branch)
+                                    <a href="{{ route($branch['route']) }}"
+                                        role="option"
+                                        @if ($currentBranchLabel === $branch['label']) aria-selected="true" @endif
+                                        class="block px-4 py-2 text-sm {{ $currentBranchLabel === $branch['label'] ? 'bg-red-50 text-red-500 font-semibold' : 'text-gray-700 hover:bg-red-50 hover:text-red-500' }}">
+                                        <div class="flex items-center gap-3">
+                                            <img loading="lazy" decoding="async"
+                                                src="{{ asset('assets/icons/Vector (4).png') }}"
+                                                alt="" class="w-3 h-3 shrink-0">
+                                            <span>{{ $branch['label'] }}</span>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
 
@@ -438,8 +449,8 @@
 
                         <!-- COLUMN 4 -->
                         <ul class="mega-col condition-col">
-                            <li><a href="{{ route('conditions.show', 'breast-cancer') }}">
-                                    <i class="fa-solid fa-ribbon"></i> Breast Cancer</a></li>
+                            <li><a href="{{ route('conditions.show', 'endometriosis') }}">
+                                    <i class="fa-solid fa-moon"></i>endometriosis</a></li>
 
                             <li><a href="{{ route('conditions.show', 'tuberculosis') }}">
                                     <i class="fa-solid fa-bacteria"></i> Tuberculosis</a></li>
@@ -793,33 +804,35 @@
 
                 <div class="grid grid-cols-3 gap-y-6 gap-x-4 text-center text-xs text-gray-700">
             
-                    <!-- PICK HOSPITAL -->
+                    <!-- PICK HOSPITAL — same branch list as desktop "Pick Branch" -->
                     <div class="flex flex-col items-center gap-2 relative">
             
-                        <button id="mobileHospitalToggle" class="flex flex-col items-center gap-2">
+                        <button id="mobileHospitalToggle" type="button"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                            aria-label="Pick hospital branch"
+                            class="flex flex-col items-center gap-2">
             
                             <div class="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center">
-                                 <img loading="lazy" decoding="async" src="{{ asset('assets/icons/hospital.webp') }}" class="w-6">
+                                 <img loading="lazy" decoding="async" src="{{ asset('assets/icons/hospital.webp') }}" class="w-6" alt="">
                             </div>
             
-                            Pick Hospital
+                            <span>{{ $currentBranchLabel ?? 'Pick Hospital' }}</span>
             
                         </button>
             
                         <!-- DROPDOWN -->
                         <div id="mobileHospitalMenu"
-                            class="hidden absolute top-full mt-2 bg-white border rounded-lg shadow-md w-40 text-sm">
-            
-                            <a href="{{ route('bg-road') }}"
-                                class="block px-4 py-2 hover:bg-gray-100">
-                                BG Road
-                            </a>
-            
-                            <a href="{{ route('uttarahalli') }}"
-                                class="block px-4 py-2 hover:bg-gray-100">
-                                Uttarahalli
-                            </a>
-            
+                            role="listbox"
+                            class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white border rounded-lg shadow-md w-44 text-sm z-[21000]">
+                            @foreach ($navBranches as $branch)
+                                <a href="{{ route($branch['route']) }}"
+                                    role="option"
+                                    @if ($currentBranchLabel === $branch['label']) aria-selected="true" @endif
+                                    class="block px-4 py-2 {{ $currentBranchLabel === $branch['label'] ? 'bg-red-50 text-red-500 font-semibold' : 'hover:bg-gray-100 text-gray-700' }}">
+                                    {{ $branch['label'] }}
+                                </a>
+                            @endforeach
                         </div>
             
                     </div>

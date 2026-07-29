@@ -163,6 +163,30 @@ class BlogsResource extends Resource
                 ])
                 ->columnSpanFull(),
 
+            Section::make('FAQs')
+                ->description('Add frequently asked questions for this article. They appear at the bottom of the post and in search results.')
+                ->components([
+                    Repeater::make('faqs')
+                        ->label('Questions & Answers')
+                        ->schema([
+                            TextInput::make('question')
+                                ->label('Question')
+                                ->required()
+                                ->columnSpanFull(),
+                            Textarea::make('answer')
+                                ->label('Answer')
+                                ->rows(3)
+                                ->required()
+                                ->columnSpanFull(),
+                        ])
+                        ->defaultItems(0)
+                        ->reorderable()
+                        ->collapsible()
+                        ->columnSpanFull(),
+                ])
+                ->collapsible()
+                ->columnSpanFull(),
+
         ]);
     }
 

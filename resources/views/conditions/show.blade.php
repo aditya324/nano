@@ -137,9 +137,10 @@ function renderConditionContent($data) {
 <div class="sticky top-0 z-40 bg-white border-b">
     <div class="container-narrow flex gap-3 py-3 overflow-x-auto no-scrollbar">
         @if($condition->overview)<button class="pill-btn active" data-target="overview">Overview</button>@endif
-        @if($condition->symptoms)<button class="pill-btn" data-target="clinical-details">Clinical Details</button>@endif
-        @if($condition->treatment)<button class="pill-btn" data-target="treatment">Treatment</button>@endif
-        @if($condition->recovery)<button class="pill-btn" data-target="recovery">Outlook</button>@endif
+        <button class="pill-btn" data-target="clinical-details" data-tab="tab-symptoms">Symptoms</button>
+        <button class="pill-btn" data-target="clinical-details" data-tab="tab-causes">Causes</button>
+        <button class="pill-btn" data-target="treatment">Treatment</button>
+        <button class="pill-btn" data-target="recovery">Outlook</button>
         @if ($condition->faqs && $condition->faqs->count())
             <button class="pill-btn" data-target="faqs">FAQs</button>
         @endif
@@ -162,52 +163,43 @@ function renderConditionContent($data) {
 </section>
 @endif
 
-{{-- VERTICAL TABS (Symptoms, Causes, Risks) --}}
+{{-- VERTICAL TABS: always show Symptoms / Causes / Risks / Diagnosis --}}
 <section id="clinical-details" class="section-spacing bg-[#f8fafc] scroll-mt-32">
     <div class="container-narrow">
         <div class="grid md:grid-cols-3 gap-12 items-start">
             <div class="space-y-4">
-                @if($condition->symptoms)<button class="vtab-btn active" data-tab="tab-symptoms">Symptoms <span>›</span></button>@endif
-                @if($condition->causes)<button class="vtab-btn" data-tab="tab-causes">Causes <span>›</span></button>@endif
-                @if($condition->risks)<button class="vtab-btn" data-tab="tab-risks">Risks & Complications <span>›</span></button>@endif
-                @if($condition->diagnosis)<button class="vtab-btn" data-tab="tab-diagnosis">Diagnosis <span>›</span></button>@endif
+                <button class="vtab-btn active" data-tab="tab-symptoms">Symptoms <span>›</span></button>
+                <button class="vtab-btn" data-tab="tab-causes">Causes <span>›</span></button>
+                <button class="vtab-btn" data-tab="tab-risks">Risks & Complications <span>›</span></button>
+                <button class="vtab-btn" data-tab="tab-diagnosis">Diagnosis <span>›</span></button>
             </div>
 
             <div class="md:col-span-2 card-clean vtab-content min-h-[400px]">
-                @if($condition->symptoms)
                 <div id="tab-symptoms" class="vtab-panel">
                     <h3>Common Symptoms</h3>
                     @php renderConditionContent($condition->symptoms); @endphp
                 </div>
-                @endif
 
-                @if($condition->causes)
-                <div id="tab-causes" class="vtab-panel {{ $condition->symptoms ? 'hidden' : '' }}">
+                <div id="tab-causes" class="vtab-panel hidden">
                     <h3>Causes & Triggers</h3>
                     @php renderConditionContent($condition->causes); @endphp
                 </div>
-                @endif
 
-                @if($condition->risks)
                 <div id="tab-risks" class="vtab-panel hidden">
                     <h3>Risks if Untreated</h3>
                     @php renderConditionContent($condition->risks); @endphp
                 </div>
-                @endif
 
-                @if($condition->diagnosis)
                 <div id="tab-diagnosis" class="vtab-panel hidden">
                     <h3>Diagnosis & Prevention</h3>
                     @php renderConditionContent($condition->diagnosis); @endphp
                 </div>
-                @endif
             </div>
         </div>
     </div>
 </section>
 
-{{-- TREATMENT --}}
-@if($condition->treatment)
+{{-- TREATMENT: always show --}}
 <section id="treatment" class="section-spacing bg-white scroll-mt-32">
     <div class="container-narrow">
         <h2 class="text-2xl font-semibold text-gray-800 mb-6">Treatment Options</h2>
@@ -216,10 +208,8 @@ function renderConditionContent($data) {
         </div>
     </div>
 </section>
-@endif
 
-{{-- RECOVERY --}}
-@if($condition->recovery)
+{{-- RECOVERY: always show --}}
 <section id="recovery" class="section-spacing bg-[#f8fafc] scroll-mt-32 border-t">
     <div class="container-narrow">
         <h2 class="text-2xl font-semibold text-gray-800 mb-6">Recovery & Outlook</h2>
@@ -228,7 +218,6 @@ function renderConditionContent($data) {
         </div>
     </div>
 </section>
-@endif
 
 
 @if ($condition->faqs && $condition->faqs->count())
@@ -289,12 +278,21 @@ document.addEventListener('DOMContentLoaded', function () {
     pillButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const target = document.getElementById(btn.dataset.target);
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 100,
-                    behavior: 'smooth'
-                });
+            if (!target) return;
+
+            if (btn.dataset.tab) {
+                document.querySelectorAll('.vtab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.vtab-panel').forEach(panel => panel.classList.add('hidden'));
+                const vtabBtn = document.querySelector(`.vtab-btn[data-tab="${btn.dataset.tab}"]`);
+                const panel = document.getElementById(btn.dataset.tab);
+                if (vtabBtn) vtabBtn.classList.add('active');
+                if (panel) panel.classList.remove('hidden');
             }
+
+            window.scrollTo({
+                top: target.offsetTop - 100,
+                behavior: 'smooth'
+            });
         });
     });
 
@@ -308,7 +306,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
         pillButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.target === current);
+            const isActive = btn.dataset.target === current;
+            btn.classList.toggle('active', isActive && (!btn.dataset.tab || btn.dataset.tab === 'tab-symptoms'));
         });
     });
 
